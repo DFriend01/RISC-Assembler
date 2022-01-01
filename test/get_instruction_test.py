@@ -2,7 +2,7 @@ import unittest
 import re
 
 def get_instruction(line):
-    return re.sub("#.*$", "", line).strip().split()
+    return re.sub("#.*$", "", line).strip().upper().split()
 
 class TestGetInstruction(unittest.TestCase):
 
@@ -43,9 +43,18 @@ class TestGetInstruction(unittest.TestCase):
     def test_only_instruction(self):
         s = "FETCH R4 ABCD"
         expected = ["FETCH", "R4", "ABCD"]
+        self.assertListEqual(get_instruction(s), expected)
 
     def test_instruction_with_trailing_and_leading_whitespace(self):
         s = "      MOV R4 R1        "
+        expected = ["MOV", "R4", "R1"]
+        self.assertListEqual(get_instruction(s), expected)
+
+    def test_uppercase_conversion(self):
+        s = "add r1 r2 # Comment"
+        expected = ["ADD", "R1", "R2"]
+        self.assertListEqual(get_instruction(s), expected)
+
 
 if __name__ == "__main__":
     unittest.main()
