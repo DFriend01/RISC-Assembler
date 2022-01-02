@@ -104,7 +104,7 @@ def binbits(x, n):
 
 def hexbytes(x, n):
     num_nibbles = 2 * n
-    bytes = hex(x).split('x')[1]
+    bytes = hex(x).lower().split('x')[1]
 
     if len(bytes) < num_nibbles:
         bytes = '0' * (num_nibbles - len(bytes)) + bytes
@@ -128,11 +128,12 @@ class ErrorCheck:
 
     @staticmethod
     def validHex(x):
-        hexsplit = x.split('x')
+
+        hexsplit = x.lower().split('x')
         num = hexsplit[0] if len(hexsplit) < 2 else hexsplit[1]
         try:
             int(num, 16)
-            if len(num) > MAXNIBBLES:
+            if (len(num) > MAXNIBBLES) or (x == "0x"):
                 raise ValueError
         except:
             raise SyntaxError()
