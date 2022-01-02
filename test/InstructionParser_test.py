@@ -1,5 +1,6 @@
 import unittest
 from src.RISCAssembler.InstructionParser import InstructionParser
+from src.RISCAssembler.SyntaxError import SyntaxError
 
 class TestInstructionEncodings(unittest.TestCase):
 
@@ -282,8 +283,53 @@ class TestInstructionEncodings(unittest.TestCase):
         instruction = "store r9 36"
         hex_encoding = "51093600"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
+
+    def test_comment(self):
+        instruction = "# This is a comment. There should be no instruction output"
+        self.assertTrue(InstructionParser.parse(instruction) is None)
  
-   
+
+class TestBadInstructions(unittest.TestCase):
+
+    def test_nonexistent_instruction(self):
+        with self.assertRaises(SyntaxError):
+            instruction = "MULT R1 R2"
+            InstructionParser.parse(instruction)
+
+    def test_too_many_arguments(self):
+        with self.assertRaises(SyntaxError):
+            instruction = "ADD R1 R2 R3"
+            InstructionParser.parse(instruction)
+
+    def test_too_little_arguments(self):
+        with self.assertRaises(SyntaxError):
+            instruction = "FETCH R5"
+            InstructionParser.parse(instruction)
+
+    def test_bad_register(self):
+        with self.assertRaises(SyntaxError):
+            instruction = "add r10 r9"
+            InstructionParser.parse(instruction)
+
+    def test_bad_register_with_literal(self):
+        with self.assertRaises(SyntaxError):
+            instruction = "FETCH R12 0x11"
+            InstructionParser.parse(instruction)
+
+    def test_invalid_literal_1(self):
+        with self.assertRaises(SyntaxError):
+            instruction = "JMP 0x"
+            InstructionParser.parse(instruction)
+
+    def test_invalid_literal_2(self):
+        with self.assertRaises(SyntaxError):
+            instruction = "JNE 0xgff0"
+            InstructionParser.parse(instruction)
+
+    def test_literal_too_large(self):
+        with self.assertRaises(SyntaxError):
+            instruction = "ADD R1 0x22100"
+            InstructionParser.parse(instruction)
 
 if __name__ == "__main__":
     unittest.main()
