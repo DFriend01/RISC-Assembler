@@ -1,6 +1,6 @@
 import re
 from . import instructions
-from .SyntaxError import SyntaxError
+from .SyntaxError import AssemblerSyntaxError
 from . import errorcodes
 
 REGLEN = 2
@@ -31,12 +31,12 @@ class ErrorCheck:
     @staticmethod
     def validInstructionName(name, linenumber, line):
         if (not name in instructions.INSTRUCTIONS_WITH_REGISTERS) and (not name in instructions.SPEICAL_INSTRUCTIONS):
-            raise SyntaxError(linenumber, line, errorcodes.UNDEFINED_INSTRUCTION)
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.UNDEFINED_INSTRUCTION)
 
     @staticmethod
     def validNumberOfArguments(actual_numargs, expected_numargs, linenumber, line):
         if actual_numargs != expected_numargs:
-            raise SyntaxError(linenumber, line, errorcodes.INCORRECT_NARGS)
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.INCORRECT_NARGS)
 
     @staticmethod
     def validHex(x, linenumber=0, line=""):
@@ -49,15 +49,15 @@ class ErrorCheck:
             if (x == "0x"):
                 raise ValueError
         except:
-            raise SyntaxError(linenumber, line, errorcodes.BAD_LITERAL)
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.BAD_LITERAL)
 
         if (len(num) > MAXNIBBLES):
-            raise SyntaxError(linenumber, line, errorcodes.BIG_LITERAL)
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.BIG_LITERAL)
         
     @staticmethod
     def validRegister(register, linenumber, line):
         if(not register in instructions.REGISTERS):
-            raise SyntaxError(linenumber, line, errorcodes.BAD_REGISTER)
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.BAD_REGISTER)
 
 
 class InstructionParser:
@@ -101,7 +101,7 @@ class InstructionParser:
         elif name in instructions.INSTRUCTIONS_WITH_REGISTERS:
             instruction_info = instructions.INSTRUCTIONS_WITH_REGISTERS[name]
         else:
-            raise SyntaxError(linenumber, line, errorcodes.UNKNOWN_ERROR)
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.UNKNOWN_ERROR)
 
         expected_numargs = instruction_info.numargs
         ErrorCheck.validNumberOfArguments(actual_numargs, expected_numargs, linenumber, line)
@@ -146,7 +146,7 @@ class InstructionParser:
                              + instruction_info.cond + instructions.REGISTERS[instruction[1]] \
                              + instructions.REGISTERS[instruction[2]] + (12 * "0")
         else:
-            raise SyntaxError(linenumber, line, errorcodes.UNKNOWN_ERROR)
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.UNKNOWN_ERROR)
 
         return hexbytes(int(encoding, 2), INSTRUCTION_LENGTH_HEX)
 

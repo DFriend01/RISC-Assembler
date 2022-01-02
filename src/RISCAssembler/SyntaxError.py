@@ -5,10 +5,10 @@ from . import errorcodes
 def get_instruction(line):
         return re.sub("#.*$", "", line).strip().upper().split()
 
-class SyntaxError(Exception):
+class AssemblerSyntaxError(Exception):
 
     def __init__(self, linenumber=0, line="", errorcode=errorcodes.UNKNOWN_ERROR):
-        self.message = SyntaxError.get_message(linenumber, line, errorcode)
+        self.message = AssemblerSyntaxError.get_message(linenumber, line, errorcode)
         super().__init__(self.message)
 
     def __str__(self):
