@@ -31,7 +31,7 @@ class Assembler:
             if instr is not None:
                 instructions.append(instr + "\n")
 
-        if (not os.path.exists(os.path.dirname(outfilename))) and (os.path.dirname != ""):
+        if (not os.path.exists(os.path.dirname(outfilename))) and (os.path.dirname(outfilename) != ""):
             os.makedirs(os.path.dirname(outfilename))
 
         outfile = open(outfilename, "w")
