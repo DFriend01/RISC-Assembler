@@ -7,7 +7,7 @@ REGLEN = 2
 MINREG = 0
 MAXREG = 9
 MAXNIBBLES = 4
-MEMORY_OPCODE = "101"
+MEMORY_OPCODE = "0101"
 INSTRUCTION_LENGTH_BINARY = 32
 INSTRUCTION_LENGTH_HEX = 4 #bytes
 
@@ -63,13 +63,13 @@ class ErrorCheck:
 class InstructionParser:
 
     @staticmethod
-    def parse(line, linenumber=0):
+    def parse(line, linenumber=0, output_binary=False):
         instruction = InstructionParser.__get_instruction(line)
 
         if not instruction:
             return None
         else:
-            return InstructionParser.__encode_instruction(instruction, line, linenumber)
+            return InstructionParser.__encode_instruction(instruction, line, linenumber, output_binary)
 
     @staticmethod
     def __get_instruction(line):
@@ -86,7 +86,7 @@ class InstructionParser:
         return False
     
     @staticmethod
-    def __encode_instruction(instruction, line, linenumber):
+    def __encode_instruction(instruction, line, linenumber, output_binary):
         name = instruction[0]
         ErrorCheck.validInstructionName(name, linenumber, line)
 
@@ -148,5 +148,7 @@ class InstructionParser:
         else:
             raise AssemblerSyntaxError(linenumber, line, errorcodes.UNKNOWN_ERROR)
 
-        return hexbytes(int(encoding, 2), INSTRUCTION_LENGTH_HEX)
-
+        if output_binary:
+            return encoding
+        else:
+            return hexbytes(int(encoding, 2), INSTRUCTION_LENGTH_HEX)
