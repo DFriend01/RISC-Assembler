@@ -39,13 +39,13 @@ class TestInstructionEncodings(unittest.TestCase):
         hex_encoding = "18423000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
-    def test_movle_with_register(self):
-        instruction = "movle r2 r3"
+    def test_movl_with_register(self):
+        instruction = "movl r2 r3"
         hex_encoding = "18523000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
-    def test_movge_with_register(self):
-        instruction = "movge r2 r3"
+    def test_movg_with_register(self):
+        instruction = "movg r2 r3"
         hex_encoding = "18623000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
  
@@ -139,13 +139,13 @@ class TestInstructionEncodings(unittest.TestCase):
         hex_encoding = "38250000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
-    def test_jle_with_register(self):
-        instruction = "jle r5"
+    def test_jl_with_register(self):
+        instruction = "jl r5"
         hex_encoding = "38550000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
-    def test_jge_with_register(self):
-        instruction = "jge r5"
+    def test_jg_with_register(self):
+        instruction = "jg r5"
         hex_encoding = "38650000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
@@ -184,13 +184,13 @@ class TestInstructionEncodings(unittest.TestCase):
         hex_encoding = "10420000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
-    def test_movle_with_literal(self):
-        instruction = "movle r2 000"
+    def test_movl_with_literal(self):
+        instruction = "movl r2 000"
         hex_encoding = "10520000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
-    def test_movge_with_literal(self):
-        instruction = "movge r2 0x0065"
+    def test_movg_with_literal(self):
+        instruction = "movg r2 0x0065"
         hex_encoding = "10620065"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
  
@@ -264,13 +264,13 @@ class TestInstructionEncodings(unittest.TestCase):
         hex_encoding = "30200005"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
-    def test_jle_with_literal(self):
-        instruction = "jle 0x112"
+    def test_jl_with_literal(self):
+        instruction = "jl 0x112"
         hex_encoding = "30500112"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
-    def test_jge_with_literal(self):
-        instruction = "jge 1000"
+    def test_jg_with_literal(self):
+        instruction = "jg 1000"
         hex_encoding = "30601000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 

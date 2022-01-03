@@ -6,8 +6,8 @@ INSTRUCTIONS_WITH_LITERALS = {
     "MOVNE"   : Instruction("0001", "00000", "010", 2),
     "MOVC"    : Instruction("0001", "00000", "011", 2),
     "MOVNC"   : Instruction("0001", "00000", "100", 2),
-    "MOVLE"   : Instruction("0001", "00000", "101", 2),
-    "MOVGE"   : Instruction("0001", "00000", "110", 2),
+    "MOVL"   : Instruction("0001", "00000", "101", 2),
+    "MOVG"   : Instruction("0001", "00000", "110", 2),
 
     "ADD"     : Instruction("0010", "00000", "010", 2),
     "ADDC"    : Instruction("0010", "00001", "011", 2),
@@ -24,8 +24,8 @@ INSTRUCTIONS_WITH_LITERALS = {
     "JMP"     : Instruction("0011", "00000", "000", 1),
     "JE"      : Instruction("0011", "00000", "001", 1),
     "JNE"     : Instruction("0011", "00000", "010", 1),
-    "JLE"     : Instruction("0011", "00000", "101", 1),
-    "JGE"     : Instruction("0011", "00000", "110", 1),
+    "JL"     : Instruction("0011", "00000", "101", 1),
+    "JG"     : Instruction("0011", "00000", "110", 1),
 
     "FETCH"   : Instruction("0101", "00001", "000", 2),
     "STORE"   : Instruction("0101", "00010", "000", 2)
@@ -37,8 +37,8 @@ INSTRUCTIONS_WITH_REGISTERS = {
     "MOVNE"   : Instruction("0001", "10000", "010", 2),
     "MOVC"    : Instruction("0001", "10000", "011", 2),
     "MOVNC"   : Instruction("0001", "10000", "100", 2),
-    "MOVLE"   : Instruction("0001", "10000", "101", 2),
-    "MOVGE"   : Instruction("0001", "10000", "110", 2),
+    "MOVL"   : Instruction("0001", "10000", "101", 2),
+    "MOVG"   : Instruction("0001", "10000", "110", 2),
 
     "ADD"     : Instruction("0010", "10000", "010", 2),
     "ADDC"    : Instruction("0010", "10001", "011", 2),
@@ -59,8 +59,8 @@ INSTRUCTIONS_WITH_REGISTERS = {
     "JMP"     : Instruction("0011", "10000", "000", 1),
     "JE"      : Instruction("0011", "10000", "001", 1),
     "JNE"     : Instruction("0011", "10000", "010", 1),
-    "JLE"     : Instruction("0011", "10000", "101", 1),
-    "JGE"     : Instruction("0011", "10000", "110", 1),
+    "JL"     : Instruction("0011", "10000", "101", 1),
+    "JG"     : Instruction("0011", "10000", "110", 1),
 
     "FETCH"   : Instruction("0101", "10001", "000", 2),
     "STORE"   : Instruction("0101", "10010", "000", 2)
