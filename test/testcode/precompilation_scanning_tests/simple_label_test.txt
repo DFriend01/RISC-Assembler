@@ -10,3 +10,6 @@ bar: add r1 0x1
    silly: 
    funny:
        xor r4 r9
+
+unused1:
+unused2:

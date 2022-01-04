@@ -78,6 +78,13 @@ class Assembler:
                 else:
                     instructions.append((linenumber + 1, parsed_line))
 
+        # Remove unused labels
+        for label in reversed(list(labels.keys())):
+            if int(labels[label], 16) == len(instructions):
+                del labels[label]
+            else:
+                break
+
         return instructions, constants, labels   
 
 
