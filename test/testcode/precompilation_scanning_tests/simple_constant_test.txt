@@ -1,9 +1,9 @@
 # Simple constants test
 
-constant zero 0
+constant zero 0x0
 
 mov r8 r3
 
 CONSTANT foo 0x11
-CONSTANT bar bb
+CONSTANT bar 0xbb
 

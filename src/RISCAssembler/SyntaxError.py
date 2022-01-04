@@ -45,13 +45,13 @@ class AssemblerSyntaxError(Exception):
                 badliteral = instruction[1]
             else:
                 badliteral = instruction[2]
-            message += badliteral + " is not a valid 1-byte hexadecimal value"
+            message += str(badliteral) + " is not a valid 1-byte hexadecimal value prefixed with 0x"
         elif (errorcode == errorcodes.BIG_LITERAL):
             if (not instruction[1] in instructions.REGISTERS):
                 bigliteral = instruction[1]
             else:
                 bigliteral = instruction[2]
-            message += "Literal value should be 2 bytes, but " + bigliteral + " is too large"
+            message += "Literal value should be 2 bytes, but " + str(bigliteral) + " is too large"
         elif (errorcode == errorcodes.EMPTY_LABEL):
             message += "Cannot have empty label"
         elif (errorcode == errorcodes.LABEL_WITH_KWD):
@@ -66,6 +66,9 @@ class AssemblerSyntaxError(Exception):
             message += "Labels can only be used for jump instructions and the CALL instruction"
         elif (errorcode == errorcodes.INVALID_NAME):
             message += "Label and constant names cannot start with a digit"
+        elif (errorcode == errorcodes.BAD_ARGS):
+            message += "Instruction contains bad arguments. If using constants or labels, be sure\n" \
+                    +  "that it exists. If using literals, be sure that they are prefixed with 0x."
         else:
             message += "An unknown error has occurred"
         return message

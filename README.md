@@ -11,8 +11,8 @@ Refer to the [instruction set](https://github.com/DFriend01/RISC-Assembler/blob/
 ### Instructions
 - Instructions are **case insensitive** and indentation/extra spaces are ignored
 - Valid registers are denoted as R0 through R9 and SP (R0, R1, R2, ... R9, SP)
-- Literals cannot exceed 1 byte and must be expressed as hexadecimal values
-  - Example: 0xCD, bd, and 0x0056 are all acceptable, but not 0xDCEF
+- Literals cannot exceed 1 byte and must be expressed as hexadecimal values prefixed with `0x`
+  - Example: `0xCD`, `0xbd`, and `0x0056` are all acceptable, but not `0xDCEF` and `AA`
 - Instructions must be written on their own lines
 - Arguments are separated by spaces, and are **not** comma-separated
 - Comments can be denoted with a `#` either inline with an instruction or on its own line
@@ -45,8 +45,8 @@ A violation of any of the above will result in a syntax error and compilation wi
 ```
 # This is an example program
 
-CONSTANT foo 1
-constant bar 2
+CONSTANT foo 0x1
+constant bar 0x2
 
 MOV R1 foo         # Move 1 into register R1
 mov r2 bar         # Move 2 into register R2
@@ -55,8 +55,8 @@ mov r2 bar         # Move 2 into register R2
 subroutine: CMP r1 r2
 
             MOVL R3 0x00AA
-            MOVE R3 0
-            MOVG R3 ab
+            MOVE R3 0x0
+            MOVG R3 0xab
 
 sillylabel:
 

@@ -159,17 +159,17 @@ class TestInstructionEncodings(unittest.TestCase):
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_mov_with_literal(self):
-        instruction = ["MOV", "R2", "AB"]
+        instruction = ["MOV", "R2", "0xAB"]
         hex_encoding = "100200ab"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_move_with_literal(self):
-        instruction = ["MOVE", "R2", "FF"]
+        instruction = ["MOVE", "R2", "0xFF"]
         hex_encoding = "101200ff"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_movne_with_literal(self):
-        instruction = ["MOVNE", "R2", "ED"]
+        instruction = ["MOVNE", "R2", "0xED"]
         hex_encoding = "102200ed"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
@@ -179,12 +179,12 @@ class TestInstructionEncodings(unittest.TestCase):
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_movnc_with_literal(self):
-        instruction = ["MOVNC", "R2", "0"]
+        instruction = ["MOVNC", "R2", "0x0"]
         hex_encoding = "10420000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_movl_with_literal(self):
-        instruction = ["MOVL", "R2", "000"]
+        instruction = ["MOVL", "R2", "0x000"]
         hex_encoding = "10520000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
@@ -199,47 +199,47 @@ class TestInstructionEncodings(unittest.TestCase):
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_addc_with_literal(self):
-        instruction = ["ADDC", "R3", "8F"]
+        instruction = ["ADDC", "R3", "0x8F"]
         hex_encoding = "20b3008f"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_and_with_literal(self):
-        instruction = ["AND", "R5", "12"]
+        instruction = ["AND", "R5", "0x12"]
         hex_encoding = "21250012"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_cmp_with_literal(self):
-        instruction = ["CMP", "R0", "16"]
+        instruction = ["CMP", "R0", "0x16"]
         hex_encoding = "21800016"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_mvn_with_literal(self):
-        instruction = ["MVN", "R2", "07"]
+        instruction = ["MVN", "R2", "0x07"]
         hex_encoding = "22220007"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_not_with_literal(self):
-        instruction = ["NOT", "R5", "1"]
+        instruction = ["NOT", "R5", "0x1"]
         hex_encoding = "22a50001"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_or_with_literal(self):
-        instruction = ["OR", "R9", "010"]
+        instruction = ["OR", "R9", "0x010"]
         hex_encoding = "23290010"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_sub_with_literal(self):
-        instruction = ["SUB", "R4", "7"]
+        instruction = ["SUB", "R4", "0x7"]
         hex_encoding = "23a40007"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_subc_with_literal(self):
-        instruction = ["SUBC", "R3", "8"]
+        instruction = ["SUBC", "R3", "0x8"]
         hex_encoding = "24330008"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_test_with_literal(self):
-        instruction = ["TEST", "R2", "12"]
+        instruction = ["TEST", "R2", "0x12"]
         hex_encoding = "24820012"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
@@ -249,17 +249,17 @@ class TestInstructionEncodings(unittest.TestCase):
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_jmp_with_literal(self):
-        instruction = ["JMP", "14"]
+        instruction = ["JMP", "0x14"]
         hex_encoding = "30000014"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_je_with_literal(self):
-        instruction = ["JE", "0"]
+        instruction = ["JE", "0x0"]
         hex_encoding = "30100000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_jne_with_literal(self):
-        instruction = ["JNE", "5"]
+        instruction = ["JNE", "0x5"]
         hex_encoding = "30200005"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
@@ -269,7 +269,7 @@ class TestInstructionEncodings(unittest.TestCase):
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_jg_with_literal(self):
-        instruction = ["JG", "10"]
+        instruction = ["JG", "0x10"]
         hex_encoding = "30600010"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
@@ -279,12 +279,12 @@ class TestInstructionEncodings(unittest.TestCase):
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_store_with_literal(self):
-        instruction = ["STORE", "R9", "36"]
+        instruction = ["STORE", "R9", "0x36"]
         hex_encoding = "51090036"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_call(self):
-        instruction = ["CALL", "10"]
+        instruction = ["CALL", "0x10"]
         hex_encoding = "60000010"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
@@ -304,19 +304,19 @@ class TestInstructionsWithConstants(unittest.TestCase):
 
     def test_mov_instr(self):
         instruction = ["MOV", "R2", "FOO"]
-        constants = {"FOO" : "CB", "BAR" : "0XDC"}
+        constants = {"FOO" : "0XCB", "BAR" : "0XDC"}
         hex_encoding = "100200cb"
         self.assertEqual(InstructionParser.parse(instruction=instruction, constants=constants), hex_encoding)
 
     def test_je_instr(self):
         instruction = ["JE", "BAR"]
-        constants = {"FOO" : "CB", "BAR" : "0XDC"}
+        constants = {"FOO" : "0XCB", "BAR" : "0XDC"}
         hex_encoding = "301000dc"
         self.assertEqual(InstructionParser.parse(instruction=instruction, constants=constants), hex_encoding)
 
     def test_fetch_instr(self):
         instruction = ["FETCH", "R9", "X"]
-        constants = {"FOO" : "CB", "X" : "0X99"}
+        constants = {"FOO" : "0XCB", "X" : "0X99"}
         hex_encoding = "50890099"
         self.assertEqual(InstructionParser.parse(instruction=instruction, constants=constants), hex_encoding)
 

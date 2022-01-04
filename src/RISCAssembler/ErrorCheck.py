@@ -3,7 +3,9 @@ from .SyntaxError import AssemblerSyntaxError
 from . import errorcodes
 
 MAXNIBBLES = 2
+PREFIX_LEN = 2
 CONSTANT_NARGS = 2
+LITERAL_PREFIX = "0x"
 JMP_OPCODE = "0011"
 CALL_OPCODE = "0110"
 
@@ -24,13 +26,15 @@ class ErrorCheck:
     @staticmethod
     def validHex(x, linenumber=0, line=""):
 
-        hexsplit = x.lower().split('x')
-        num = hexsplit[0] if len(hexsplit) < 2 else hexsplit[1]
+        hexlower = x.lower()
+
+        if (len(hexlower) < PREFIX_LEN + 1) or (hexlower[:2] != LITERAL_PREFIX):
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.BAD_LITERAL)
+
+        num = hexlower.split("x")[1]
 
         try:
             int(num, 16)
-            if (x == "0x"):
-                raise ValueError
         except:
             raise AssemblerSyntaxError(linenumber, line, errorcodes.BAD_LITERAL)
 

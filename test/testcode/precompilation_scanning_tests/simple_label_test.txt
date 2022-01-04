@@ -2,7 +2,7 @@
 
 foo: mov r1 r2
 
-bar: add r1 1
+bar: add r1 0x1
      cmp r1 r2
 
 # comment: This label should not show up

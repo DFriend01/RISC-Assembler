@@ -46,6 +46,11 @@ class TestBadInstructions(unittest.TestCase):
             instruction = ["ADD", "R1", "0x22100"]
             InstructionParser.parse(instruction)
 
+    def test_literal_without_prefix(self):
+        with self.assertRaises(AssemblerSyntaxError):
+            instruction = ["ADD", "R1", "22"]
+            InstructionParser.parse(instruction)
+
 
 class TestBadLabels(unittest.TestCase):
 

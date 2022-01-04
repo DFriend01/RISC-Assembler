@@ -59,6 +59,13 @@ class InstructionParser:
             if i in labels:
                 return True
         return False
+
+    @staticmethod
+    def __contains_only_registers(instruction):
+        for i in instruction:
+            if i not in instructions.REGISTERS:
+                return False
+        return True
     
     @staticmethod
     def __encode_instruction(instruction, line, linenumber, output_binary, labels, constants):
@@ -89,11 +96,11 @@ class InstructionParser:
             has_literal = True
             instruction[1] = labels[instruction[1]]
             
-        elif name in instructions.INSTRUCTIONS_WITH_REGISTERS:
+        elif (name in instructions.INSTRUCTIONS_WITH_REGISTERS) and (InstructionParser.__contains_only_registers(instruction[1:])):
             instruction_info = instructions.INSTRUCTIONS_WITH_REGISTERS[name]
 
         else:
-            raise AssemblerSyntaxError(linenumber, line, errorcodes.UNKNOWN_ERROR)
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.BAD_ARGS)
 
         expected_numargs = instruction_info.numargs
         ErrorCheck.validNumberOfArguments(actual_numargs, expected_numargs, linenumber, line)

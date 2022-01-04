@@ -7,7 +7,7 @@ class TestPrecompilationScan(unittest.TestCase):
     def test_simple_labels(self):
         instructions_expected = [
             (3,  ["MOV", "R1", "R2"]),
-            (5,  ["ADD", "R1", "1"]),
+            (5,  ["ADD", "R1", "0X1"]),
             (6,  ["CMP", "R1", "R2"]),
             (12, ["XOR", "R4", "R9"])
         ]
@@ -37,11 +37,11 @@ class TestPrecompilationScan(unittest.TestCase):
         labels_expected = {}
 
         constants_expected = {
-            "ZERO" : "0",
+            "ZERO" : "0X0",
             "FOO"  : "0X11",
-            "BAR"  : "BB"
+            "BAR"  : "0XBB"
         }
-
+        
         instructions_actual, constants_actual, labels_actual = Assembler.scan_source_file(
             os.path.join("test", "testcode", "precompilation_scanning_tests", "simple_constant_test.txt")
         )
@@ -72,9 +72,9 @@ class TestPrecompilationScan(unittest.TestCase):
 
     def test_labels_and_constants(self):
         instructions_expected = [
-            (5,  ["MOV", "R0", "0"]),
-            (6,  ["MOV", "R1", "1"]),
-            (7,  ["MOV", "R2", "2"]),
+            (5,  ["MOV", "R0", "0X0"]),
+            (6,  ["MOV", "R1", "0X1"]),
+            (7,  ["MOV", "R2", "0X2"]),
             (13, ["ADD", "R0", "0XA"]),
             (14, ["SUB", "R1", "R0"]),
             (15, ["CMP", "R0", "R2"])
@@ -89,7 +89,7 @@ class TestPrecompilationScan(unittest.TestCase):
 
         constants_expected = {
             "FOO" : "0X55",
-            "BAR" : "0"
+            "BAR" : "0X0"
         }
 
         instructions_actual, constants_actual, labels_actual = Assembler.scan_source_file(

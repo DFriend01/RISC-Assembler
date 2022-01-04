@@ -1,12 +1,12 @@
 # Test with constants and labels
 
-CONSTANT foo 0X55
+CONSTANT foo 0x55
 
-start: mov r0 0
-       mov r1 1
-       mov r2 2
+start: mov r0 0x0
+       mov r1 0x1
+       mov r2 0x2
 
-const: constant bar 0
+const: constant bar 0x0
 
 math:
 arithmetic: 
