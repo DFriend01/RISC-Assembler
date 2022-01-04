@@ -6,6 +6,7 @@ MAXNIBBLES = 2
 PREFIX_LEN = 2
 CONSTANT_NARGS = 2
 LITERAL_PREFIX = "0x"
+NEG_SIGN = "-"
 JMP_OPCODE = "0011"
 CALL_OPCODE = "0110"
 
@@ -28,7 +29,7 @@ class ErrorCheck:
 
         hexlower = x.lower()
 
-        if (len(hexlower) < PREFIX_LEN + 1) or (hexlower[:2] != LITERAL_PREFIX):
+        if (hexlower[0] == NEG_SIGN) or (len(hexlower) < PREFIX_LEN + 1) or (hexlower[:2] != LITERAL_PREFIX):
             raise AssemblerSyntaxError(linenumber, line, errorcodes.BAD_LITERAL)
 
         num = hexlower.split("x")[1]
