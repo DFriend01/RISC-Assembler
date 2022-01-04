@@ -34,7 +34,7 @@ Refer to the [instruction set](https://github.com/DFriend01/RISC-Assembler/blob/
 - Label names are **case insensitive**
 - Labels may be declared either on its own line or inline with an instruction, and are declared like the following:
   - `<name>: <optional instruction>`
-  - Example: `bar: mov r1 0`
+  - Example: `bar: mov r1 0x0`
   - Notice how the `:` is not separated by a space from the label name
 - Labels may only be used by jump instructions and the `CALL` instruction.
 
