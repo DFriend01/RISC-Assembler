@@ -64,6 +64,8 @@ class AssemblerSyntaxError(Exception):
             message += "Cannot have duplicate constant names"
         elif (errorcode == errorcodes.MISUSED_LABEL):
             message += "Labels can only be used for jump instructions and the CALL instruction"
+        elif (errorcode == errorcodes.INVALID_NAME):
+            message += "Label and constant names cannot start with a digit"
         else:
             message += "An unknown error has occurred"
         return message

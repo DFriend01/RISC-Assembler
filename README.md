@@ -20,7 +20,7 @@ Refer to the [instruction set](https://github.com/DFriend01/RISC-Assembler/blob/
 
 ### Constants
 - Names of constants cannot be keywords (register names or instruction names)
-- Constant names may not contain spaces
+- Constant names may not contain spaces and cannot start with a digit
 - Constant names are **case insensitive**
 - Constant values are 1-byte literals and can be declared by the following:
   - `CONSTANT <name> <literal>`
@@ -30,7 +30,7 @@ Refer to the [instruction set](https://github.com/DFriend01/RISC-Assembler/blob/
 
 ### Labels
 - Names of labels cannot be keywords (register names or instruction names)
-- Label names may not contain spaces
+- Label names may not contain spaces and cannot start with a digit
 - Label names are **case insensitive**
 - Labels may be declared either on its own line or inline with an instruction, and are declared like the following:
   - `<name>: <optional instruction>`

@@ -56,6 +56,8 @@ class ErrorCheck:
                  + list(instructions.REGISTERS.keys())
         name = label[:-1]
 
+        if name[0].isdigit():
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.INVALID_NAME)
         if name in keywords:
             raise AssemblerSyntaxError(linenumber, line, errorcodes.LABEL_WITH_KWD)
         if name in existing_labels:
@@ -73,6 +75,9 @@ class ErrorCheck:
         keywords = list(instructions.INSTRUCTIONS_WITH_REGISTERS.keys()) \
                  + list(instructions.INSTRUCTIONS_WITH_LITERALS.keys()) \
                  + list(instructions.REGISTERS.keys())
+
+        if name[0].isdigit():
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.INVALID_NAME)
         if name in keywords:
             raise AssemblerSyntaxError(linenumber, line, errorcodes.CONST_WITH_KWD)
         if name in existing_consts:

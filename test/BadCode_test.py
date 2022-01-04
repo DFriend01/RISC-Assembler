@@ -65,6 +65,10 @@ class TestBadLabels(unittest.TestCase):
         with self.assertRaises(AssemblerSyntaxError):
             Assembler.scan_source_file(os.path.join("test", "testcode", "error_checking_tests", "duplicate_labels.txt"))
 
+    def test_numerical_label_name(self):
+        with self.assertRaises(AssemblerSyntaxError):
+            Assembler.scan_source_file(os.path.join("test", "testcode", "error_checking_tests", "label_start_with_digit.txt"))
+
     
 class TestBadConstants(unittest.TestCase):
 
@@ -83,6 +87,10 @@ class TestBadConstants(unittest.TestCase):
     def test_duplicate_constant(self):
         with self.assertRaises(AssemblerSyntaxError):
             Assembler.scan_source_file(os.path.join("test", "testcode", "error_checking_tests", "duplicate_constant.txt"))
+
+    def test_numerical_constant_name(self):
+        with self.assertRaises(AssemblerSyntaxError):
+            Assembler.scan_source_file(os.path.join("test", "testcode", "error_checking_tests", "constant_start_with_digit.txt"))
 
 if __name__ == "__main__":
     unittest.main()

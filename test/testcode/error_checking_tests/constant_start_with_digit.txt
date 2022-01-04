@@ -1,0 +1,3 @@
+# Test constant name starting with a digit
+
+constant 0name 0xaa
