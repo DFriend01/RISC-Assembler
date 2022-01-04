@@ -8,14 +8,35 @@ Refer to the [instruction set](https://github.com/DFriend01/RISC-Assembler/blob/
 
 ## Syntax Rules
 
+### Instructions
 - Instructions are **case insensitive** and indentation/extra spaces are ignored
-- Valid registers are denoted as R0 through R9 (R0, R1, R2, ... R9)
+- Valid registers are denoted as R0 through R9 and SP (R0, R1, R2, ... R9, SP)
 - Literals cannot exceed 1 byte and must be expressed as hexadecimal values
   - Example: 0xCD, bd, and 0x0056 are all acceptable, but not 0xDCEF
 - Instructions must be written on their own lines
 - Arguments are separated by spaces, and are **not** comma-separated
 - Comments can be denoted with a `#` either inline with an instruction or on its own line
 - All instructions must follow the instruction set
+
+### Constants
+- Names of constants cannot be keywords (register names or instruction names)
+- Constant names may not contain spaces
+- Constant names are **case insensitive**
+- Constant values are 1-byte literals and can be declared by the following:
+  - `CONSTANT <name> <literal>`
+  - Example: `CONSTANT foo 0xAB`
+- There cannot be duplicate constant names
+- If both a label and a constant share the same name, the constant will always take precedence over the label
+
+### Labels
+- Names of labels cannot be keywords (register names or instruction names)
+- Label names may not contain spaces
+- Label names are **case insensitive**
+- Labels may be declared either on its own line or inline with an instruction, and are declared like the following:
+  - `<name>: <optional instruction>`
+  - Example: `bar: mov r1 0`
+  - Notice how the `:` is not separated by a space from the label name
+- Labels may only be used by jump instructions and the `CALL` instruction.
 
 A violation of any of the above will result in a syntax error and compilation will fail.
 
@@ -24,16 +45,23 @@ A violation of any of the above will result in a syntax error and compilation wi
 ```
 # This is an example program
 
-MOV R1 1         # Move 1 into register R1
-mov r2 2         # Move 2 into register R2
+CONSTANT foo 1
+constant bar 2
 
-CMP r1 r2
+MOV R1 foo         # Move 1 into register R1
+mov r2 bar         # Move 2 into register R2
 
-MOVL R3 0x00AA  # R3 gets 0xaa if R1 < R2
-MOVE R3 0        # R3 gets 0x0 if R1 = R2
-MOVG R3 ab      # R3 get 0xab if R1 > R2
+# Labelling
+subroutine: CMP r1 r2
 
-jmp R3           # Jump to the address stored in R3
+            MOVL R3 0x00AA
+            MOVE R3 0
+            MOVG R3 ab
+
+sillylabel:
+
+            jmp subroutine
+
 ```
 
 ## Usage
