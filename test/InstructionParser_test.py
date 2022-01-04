@@ -283,5 +283,41 @@ class TestInstructionEncodings(unittest.TestCase):
         hex_encoding = "51090036"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
+
+class TestInstructionsWithConstants(unittest.TestCase):
+
+    def test_alu_instr(self):
+        instruction = ["ADD", "R1", "VAR"]
+        constants = {"VAR" : "0XAA"}
+        hex_encoding = "202100aa"
+        self.assertEqual(InstructionParser.parse(instruction=instruction, constants=constants), hex_encoding)
+
+    def test_mov_instr(self):
+        instruction = ["MOV", "R2", "FOO"]
+        constants = {"FOO" : "CB", "BAR" : "0XDC"}
+        hex_encoding = "100200cb"
+        self.assertEqual(InstructionParser.parse(instruction=instruction, constants=constants), hex_encoding)
+
+    def test_je_instr(self):
+        instruction = ["JE", "BAR"]
+        constants = {"FOO" : "CB", "BAR" : "0XDC"}
+        hex_encoding = "301000dc"
+        self.assertEqual(InstructionParser.parse(instruction=instruction, constants=constants), hex_encoding)
+
+    def test_fetch_instr(self):
+        instruction = ["FETCH", "R9", "X"]
+        constants = {"FOO" : "CB", "X" : "0X99"}
+        hex_encoding = "50890099"
+        self.assertEqual(InstructionParser.parse(instruction=instruction, constants=constants), hex_encoding)
+
+class TestInstructionsWithLabels(unittest.TestCase):
+
+    def test_jmp_with_label(self):
+        instruction = ["JMP", "HELLO"]
+        labels = {"HELLO" : "0x14"}
+        hex_encoding = "30000014"
+        self.assertEqual(InstructionParser.parse(instruction=instruction, labels=labels), hex_encoding)
+
+
 if __name__ == "__main__":
     unittest.main()
