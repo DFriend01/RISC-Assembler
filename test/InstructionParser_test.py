@@ -5,330 +5,326 @@ from src.RISCAssembler.SyntaxError import AssemblerSyntaxError
 class TestInstructionEncodings(unittest.TestCase):
 
     def test_halt(self):
-        instruction = "HALT"
+        instruction = ["HALT"]
         hex_encoding = "70000000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_nop(self):
-        instruction = "nop"
+        instruction = ["NOP"]
         hex_encoding = "00000000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_mov_with_register(self):
-        instruction = "mov r2 r3"
+        instruction = ["MOV", "R2", "R3"]
         hex_encoding = "18023000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_move_with_register(self):
-        instruction = "move r2 r3"
+        instruction = ["MOVE", "R2", "R3"]
         hex_encoding = "18123000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_movne_with_register(self):
-        instruction = "movne r2 r3"
+        instruction = ["MOVNE", "R2", "R3"]
         hex_encoding = "18223000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_movc_with_register(self):
-        instruction = "movc r2 r3"
+        instruction = ["MOVC", "R2", "R3"]
         hex_encoding = "18323000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_movnc_with_register(self):
-        instruction = "movnc r2 r3"
+        instruction = ["MOVNC", "R2", "R3"]
         hex_encoding = "18423000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_movl_with_register(self):
-        instruction = "movl r2 r3"
+        instruction = ["MOVL", "R2", "R3"]
         hex_encoding = "18523000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_movg_with_register(self):
-        instruction = "movg r2 r3"
+        instruction = ["MOVG", "R2", "R3"]
         hex_encoding = "18623000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
  
     def test_add_with_register(self):
-        instruction = "add r1 r2"
+        instruction = ["ADD", "R1", "R2"]
         hex_encoding = "28212000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_addc_with_register(self):
-        instruction = "addc r3 r3"
+        instruction = ["ADDC", "R3", "R3"]
         hex_encoding = "28b33000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_and_with_register(self):
-        instruction = "AND R5 R3"
+        instruction = ["AND", "R5", "R3"]
         hex_encoding = "29253000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_cmp_with_register(self):
-        instruction = "cmp R0 r8"
+        instruction = ["CMP", "R0", "R8"]
         hex_encoding = "29808000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_mvn_with_register(self):
-        instruction = "mvn r2 r7"
+        instruction = ["MVN", "R2", "R7"]
         hex_encoding = "2a227000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_not_with_register(self):
-        instruction = "NOT R5 R2"
+        instruction = ["NOT", "R5", "R2"]
         hex_encoding = "2aa52000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_or_with_register(self):
-        instruction = "or r9 r6"
+        instruction = ["OR", "R9", "R6"]
         hex_encoding = "2b296000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_sub_with_register(self):
-        instruction = "sub r4 r5"
+        instruction = ["SUB", "R4", "R5"]
         hex_encoding = "2ba45000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_subc_with_register(self):
-        instruction = "subc r3 r3"
+        instruction = ["SUBC", "R3", "R3"]
         hex_encoding = "2c333000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_test_with_register(self):
-        instruction = "test r2 r1"
+        instruction = ["TEST", "R2", "R1"]
         hex_encoding = "2c821000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_xor_with_register(self):
-        instruction = "xor r0 r8"
+        instruction = ["XOR", "R0", "R8"]
         hex_encoding = "2d208000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_sl0(self):
-        instruction = "sl0 r1"
+        instruction = ["SL0", "R1"]
         hex_encoding = "2da10000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_sl1(self):
-        instruction = "sl1 r1"
+        instruction = ["SL1", "R1"]
         hex_encoding = "2e210000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_sr0(self):
-        instruction = "sr0 r1"
+        instruction = ["SR0", "R1"]
         hex_encoding = "2ea10000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_sr1(self):
-        instruction = "sr1 r1"
+        instruction = ["SR1", "R1"]
         hex_encoding = "2f210000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_jmp_with_register(self):
-        instruction = "jmp r5"
+        instruction = ["JMP", "R5"]
         hex_encoding = "38050000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_je_with_register(self):
-        instruction = "je r5"
+        instruction = ["JE", "R5"]
         hex_encoding = "38150000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_jne_with_register(self):
-        instruction = "jne r5"
+        instruction = ["JNE", "R5"]
         hex_encoding = "38250000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_jl_with_register(self):
-        instruction = "jl r5"
+        instruction = ["JL", "R5"]
         hex_encoding = "38550000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_jg_with_register(self):
-        instruction = "jg r5"
+        instruction = ["JG", "R5"]
         hex_encoding = "38650000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_fetch_with_register(self):
-        instruction = "fetch r9 r8"
+        instruction = ["FETCH", "R9", "R8"]
         hex_encoding = "58898000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_store_with_register(self):
-        instruction = "store r9 r8"
+        instruction = ["STORE", "R9", "R8"]
         hex_encoding = "59098000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_mov_with_literal(self):
-        instruction = "mov r2 AB"
+        instruction = ["MOV", "R2", "AB"]
         hex_encoding = "100200ab"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_move_with_literal(self):
-        instruction = "move r2 ff"
+        instruction = ["MOVE", "R2", "FF"]
         hex_encoding = "101200ff"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_movne_with_literal(self):
-        instruction = "movne r2 ED"
+        instruction = ["MOVNE", "R2", "ED"]
         hex_encoding = "102200ed"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_movc_with_literal(self):
-        instruction = "movc r2 0x99"
+        instruction = ["MOVC", "R2", "0X99"]
         hex_encoding = "10320099"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_movnc_with_literal(self):
-        instruction = "movnc r2 0"
+        instruction = ["MOVNC", "R2", "0"]
         hex_encoding = "10420000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_movl_with_literal(self):
-        instruction = "movl r2 000"
+        instruction = ["MOVL", "R2", "000"]
         hex_encoding = "10520000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_movg_with_literal(self):
-        instruction = "movg r2 0x0065"
+        instruction = ["MOVG", "R2", "0X0065"]
         hex_encoding = "10620065"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
  
     def test_add_with_literal(self):
-        instruction = "add r1 0XAA"
+        instruction = ["ADD", "R1", "0XAA"]
         hex_encoding = "202100aa"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_addc_with_literal(self):
-        instruction = "addc r3 8F"
+        instruction = ["ADDC", "R3", "8F"]
         hex_encoding = "20b3008f"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_and_with_literal(self):
-        instruction = "AND R5 12"
+        instruction = ["AND", "R5", "12"]
         hex_encoding = "21250012"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_cmp_with_literal(self):
-        instruction = "cmp R0 16"
+        instruction = ["CMP", "R0", "16"]
         hex_encoding = "21800016"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_mvn_with_literal(self):
-        instruction = "mvn r2 07"
+        instruction = ["MVN", "R2", "07"]
         hex_encoding = "22220007"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_not_with_literal(self):
-        instruction = "NOT R5 1"
+        instruction = ["NOT", "R5", "1"]
         hex_encoding = "22a50001"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_or_with_literal(self):
-        instruction = "or r9 010"
+        instruction = ["OR", "R9", "010"]
         hex_encoding = "23290010"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_sub_with_literal(self):
-        instruction = "sub r4 7"
+        instruction = ["SUB", "R4", "7"]
         hex_encoding = "23a40007"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_subc_with_literal(self):
-        instruction = "subc r3 8"
+        instruction = ["SUBC", "R3", "8"]
         hex_encoding = "24330008"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_test_with_literal(self):
-        instruction = "test r2 12"
+        instruction = ["TEST", "R2", "12"]
         hex_encoding = "24820012"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_xor_with_literal(self):
-        instruction = "xor r0 0x0"
+        instruction = ["XOR", "R0", "0x0"]
         hex_encoding = "25200000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_jmp_with_literal(self):
-        instruction = "jmp 14"
+        instruction = ["JMP", "14"]
         hex_encoding = "30000014"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_je_with_literal(self):
-        instruction = "je 0"
+        instruction = ["JE", "0"]
         hex_encoding = "30100000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_jne_with_literal(self):
-        instruction = "jne 5"
+        instruction = ["JNE", "5"]
         hex_encoding = "30200005"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_jl_with_literal(self):
-        instruction = "jl 0x12"
+        instruction = ["JL", "0x12"]
         hex_encoding = "30500012"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_jg_with_literal(self):
-        instruction = "jg 10"
+        instruction = ["JG", "10"]
         hex_encoding = "30600010"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_fetch_with_literal(self):
-        instruction = "fetch r9 0x99"
+        instruction = ["FETCH", "R9", "0x99"]
         hex_encoding = "50890099"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_store_with_literal(self):
-        instruction = "store r9 36"
+        instruction = ["STORE", "R9", "36"]
         hex_encoding = "51090036"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
-
-    def test_comment(self):
-        instruction = "# This is a comment. There should be no instruction output"
-        self.assertTrue(InstructionParser.parse(instruction) is None)
  
 
 class TestBadInstructions(unittest.TestCase):
 
     def test_nonexistent_instruction(self):
         with self.assertRaises(AssemblerSyntaxError):
-            instruction = "MULT R1 R2"
+            instruction = ["MULT", "R1", "R2"]
             InstructionParser.parse(instruction)
 
     def test_too_many_arguments(self):
         with self.assertRaises(AssemblerSyntaxError):
-            instruction = "ADD R1 R2 R3"
+            instruction = ["ADD", "R1", "R2", "R3"]
             InstructionParser.parse(instruction)
 
     def test_too_little_arguments(self):
         with self.assertRaises(AssemblerSyntaxError):
-            instruction = "FETCH R5"
+            instruction = ["FETCH", "R5"]
             InstructionParser.parse(instruction)
 
     def test_bad_register(self):
         with self.assertRaises(AssemblerSyntaxError):
-            instruction = "add r10 r9"
+            instruction = ["ADD", "R10", "R9"]
             InstructionParser.parse(instruction)
 
     def test_bad_register_with_literal(self):
         with self.assertRaises(AssemblerSyntaxError):
-            instruction = "FETCH R12 0x11"
+            instruction = ["FETCH", "R12", "0x11"]
             InstructionParser.parse(instruction)
 
     def test_invalid_literal_1(self):
         with self.assertRaises(AssemblerSyntaxError):
-            instruction = "JMP 0x"
+            instruction = ["JMP", "0x"]
             InstructionParser.parse(instruction)
 
     def test_invalid_literal_2(self):
         with self.assertRaises(AssemblerSyntaxError):
-            instruction = "JNE 0xgf"
+            instruction = ["JNE", "0xgf"]
             InstructionParser.parse(instruction)
 
     def test_literal_too_large(self):
         with self.assertRaises(AssemblerSyntaxError):
-            instruction = "ADD R1 0x22100"
+            instruction = ["ADD", "R1", "0x22100"]
             InstructionParser.parse(instruction)
 
 if __name__ == "__main__":

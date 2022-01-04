@@ -3,6 +3,7 @@ from .SyntaxError import AssemblerSyntaxError
 from . import errorcodes
 
 MAXNIBBLES = 2
+CONSTANT_NARGS = 2
 
 class ErrorCheck:
 
@@ -40,3 +41,35 @@ class ErrorCheck:
     def validRegister(register, linenumber, line):
         if(not register in instructions.REGISTERS):
             raise AssemblerSyntaxError(linenumber, line, errorcodes.BAD_REGISTER)
+
+    @staticmethod
+    def validLabel(label, linenumber, line, existing_labels):
+        if len(label) == 1:
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.EMPTY_LABEL)
+
+        keywords = instructions.INSTRUCTIONS_WITH_REGISTERS.keys() \
+                 + instructions.INSTRUCTIONS_WITH_LITERALS.keys() \
+                 + instructions.REGISTERS.keys()
+        name = label[:-1]
+        
+        if name in keywords:
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.LABEL_WITH_KWD)
+        if name in existing_labels:
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.LABEL_EXISTS)
+
+    @staticmethod
+    def validConstant(parsed_line, linenumber, line, existing_consts):
+        if len(parsed_line) - 1 != CONSTANT_NARGS:
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.INCORRECT_NARGS)
+
+        name = parsed_line[1]
+        value = parsed_line[2]
+
+        ErrorCheck.validHex(value, linenumber, line)
+        keywords = instructions.INSTRUCTIONS_WITH_REGISTERS.keys() \
+                 + instructions.INSTRUCTIONS_WITH_LITERALS.keys() \
+                 + instructions.REGISTERS.keys()
+        if name in keywords:
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.CONST_WITH_KWD)
+        if name in existing_consts:
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.CONST_EXISTS)

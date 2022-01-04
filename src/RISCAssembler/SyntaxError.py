@@ -26,8 +26,12 @@ class AssemblerSyntaxError(Exception):
         elif (errorcode == errorcodes.INCORRECT_NARGS):
             if name in instructions.INSTRUCTIONS_WITH_REGISTERS:
                 nargs = instructions.INSTRUCTIONS_WITH_REGISTERS[name].numargs
-            else:
-                nargs = instructions.SPEICAL_INSTRUCTIONS[name]
+            elif name in instructions.INSTRUCTIONS_WITH_LITERALS:
+                nargs = instructions.INSTRUCTIONS_WITH_LITERALS[name].numargs
+            elif name in instructions.SPEICAL_INSTRUCTIONS:
+                nargs = instructions.SPEICAL_INSTRUCTIONS[name].numargs
+            else: # A constant
+                nargs = 2
             message += "Instruction " + name + " expected " + str(nargs) \
                     +  " arguments, but " + str(len(args)) + " arguments were given"
         elif (errorcode == errorcodes.BAD_REGISTER):
@@ -41,13 +45,25 @@ class AssemblerSyntaxError(Exception):
                 badliteral = instruction[1]
             else:
                 badliteral = instruction[2]
-            message += badliteral + " is not a valid 2-byte hexadecimal value"
+            message += badliteral + " is not a valid 1-byte hexadecimal value"
         elif (errorcode == errorcodes.BIG_LITERAL):
             if (not instruction[1] in instructions.REGISTERS):
                 bigliteral = instruction[1]
             else:
                 bigliteral = instruction[2]
             message += "Literal value should be 2 bytes, but " + bigliteral + " is too large"
+        elif (errorcode == errorcodes.EMPTY_LABEL):
+            message += "Cannot have empty label"
+        elif (errorcode == errorcodes.LABEL_WITH_KWD):
+            message += "Label name cannot be a keyword"
+        elif (errorcode == errorcodes.LABEL_EXISTS):
+            message += "Cannot have duplicate labels"
+        elif (errorcode == errorcodes.EMPTY_CONST):
+            message += "Attempted to define a constant without a value"
+        elif (errorcode == errorcodes.CONST_WITH_KWD):
+            message += "Constant name cannot be a keyword"
+        elif (errorcode == errorcodes.CONST_EXISTS):
+            message += "Cannot have duplicate constant names"
         else:
             message += "An unknown error has occurred"
         return message

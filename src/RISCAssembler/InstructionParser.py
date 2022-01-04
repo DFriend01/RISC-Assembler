@@ -28,17 +28,13 @@ def hexbytes(x, n):
 class InstructionParser:
 
     @staticmethod
-    def parse(line, linenumber=0, output_binary=False):
-        instruction = InstructionParser.__get_instruction(line)
+    def parse(instruction, linenumber=0, output_binary=False):
+        line = " ".join(instruction)
 
         if not instruction:
             return None
         else:
             return InstructionParser.__encode_instruction(instruction, line, linenumber, output_binary)
-
-    @staticmethod
-    def __get_instruction(line):
-        return re.sub("#.*$", "", line).strip().upper().split()
 
     @staticmethod
     def __contains_literal(instruction):
