@@ -1,9 +1,8 @@
 import os
 import re
 
-from RISCAssembler.ErrorCheck import ErrorCheck
+from .ErrorCheck import ErrorCheck
 from .InstructionParser import InstructionParser
-from .SyntaxError import AssemblerSyntaxError
 
 def get_file_extension(file):
     return os.path.splitext(file)[1]
@@ -52,7 +51,9 @@ class Assembler:
         constants = {}
         labels = {}
 
-        Lines = open(infilename, "r").readlines()
+        infile = open(infilename, "r")
+        Lines = infile.readlines()
+        infile.close()
 
         for linenumber, line in enumerate(Lines):
             parsed_line = Assembler.get_instruction(line)
