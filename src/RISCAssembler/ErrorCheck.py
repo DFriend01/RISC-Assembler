@@ -4,6 +4,8 @@ from . import errorcodes
 
 MAXNIBBLES = 2
 CONSTANT_NARGS = 2
+JMP_OPCODE = "0011"
+CALL_OPCODE = "0110"
 
 class ErrorCheck:
 
@@ -73,3 +75,8 @@ class ErrorCheck:
             raise AssemblerSyntaxError(linenumber, line, errorcodes.CONST_WITH_KWD)
         if name in existing_consts:
             raise AssemblerSyntaxError(linenumber, line, errorcodes.CONST_EXISTS)
+
+    @staticmethod
+    def validLabelForJumpAndCall(opcode, linenumber, line):
+        if (opcode != JMP_OPCODE) and (opcode != CALL_OPCODE):
+            raise AssemblerSyntaxError(linenumber, line, errorcodes.MISUSED_LABEL)

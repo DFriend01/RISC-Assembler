@@ -28,13 +28,13 @@ def hexbytes(x, n):
 class InstructionParser:
 
     @staticmethod
-    def parse(instruction, linenumber=0, output_binary=False):
+    def parse(instruction, linenumber=0, output_binary=False, labels={}, constants={}):
         line = " ".join(instruction)
 
         if not instruction:
             return None
         else:
-            return InstructionParser.__encode_instruction(instruction, line, linenumber, output_binary)
+            return InstructionParser.__encode_instruction(instruction, line, linenumber, output_binary, labels, constants)
 
     @staticmethod
     def __contains_literal(instruction):
@@ -45,9 +45,23 @@ class InstructionParser:
             except:
                 continue
         return False
+
+    @staticmethod
+    def __contains_constant(instruction, constants):
+        for i in instruction:
+            if i in constants:
+                return True
+        return False
     
     @staticmethod
-    def __encode_instruction(instruction, line, linenumber, output_binary):
+    def __contains_label(instruction, labels):
+        for i in instruction:
+            if i in labels:
+                return True
+        return False
+    
+    @staticmethod
+    def __encode_instruction(instruction, line, linenumber, output_binary, labels, constants):
         name = instruction[0]
         ErrorCheck.validInstructionName(name, linenumber, line)
 
@@ -56,11 +70,28 @@ class InstructionParser:
         actual_numargs = len(instruction) - 1
         if (actual_numargs == 0) and (name in instructions.SPEICAL_INSTRUCTIONS):
             instruction_info = instructions.SPEICAL_INSTRUCTIONS[name]
+
         elif (InstructionParser.__contains_literal(instruction[1:])) and (name in instructions.INSTRUCTIONS_WITH_LITERALS):
             instruction_info = instructions.INSTRUCTIONS_WITH_LITERALS[name]
             has_literal = True
+
+        elif (InstructionParser.__contains_constant(instruction[1:], constants)) and (name in instructions.INSTRUCTIONS_WITH_LITERALS):
+            instruction_info = instructions.INSTRUCTIONS_WITH_LITERALS[name]
+            has_literal = True
+            if instruction[1] in constants:
+                instruction[1] = constants[instruction[1]]
+            elif instruction[2] in constants:
+                instruction[2] = constants[instruction[2]]
+
+        elif (InstructionParser.__contains_label(instruction[1:], labels)) and (name in instructions.INSTRUCTIONS_WITH_LITERALS):
+            instruction_info = instructions.INSTRUCTIONS_WITH_LITERALS[name]
+            ErrorCheck.validLabelForJumpAndCall(instruction_info.opcode, linenumber, line)
+            has_literal = True
+            instruction[1] = labels[instruction[1]]
+            
         elif name in instructions.INSTRUCTIONS_WITH_REGISTERS:
             instruction_info = instructions.INSTRUCTIONS_WITH_REGISTERS[name]
+
         else:
             raise AssemblerSyntaxError(linenumber, line, errorcodes.UNKNOWN_ERROR)
 

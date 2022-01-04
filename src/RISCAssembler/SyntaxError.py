@@ -62,6 +62,8 @@ class AssemblerSyntaxError(Exception):
             message += "Constant name cannot be a keyword"
         elif (errorcode == errorcodes.CONST_EXISTS):
             message += "Cannot have duplicate constant names"
+        elif (errorcode == errorcodes.MISUSED_LABEL):
+            message += "Labels can only be used for jump instructions and the CALL instruction"
         else:
             message += "An unknown error has occurred"
         return message
