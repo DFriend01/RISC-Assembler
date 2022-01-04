@@ -10,8 +10,8 @@ Refer to the [instruction set](https://github.com/DFriend01/RISC-Assembler/blob/
 
 - Instructions are **case insensitive** and indentation/extra spaces are ignored
 - Valid registers are denoted as R0 through R9 (R0, R1, R2, ... R9)
-- Literals cannot exceed 2 bytes and must be expressed as hexadecimal values
-  - Example: 0xABCD, 12bd, and 0x56 are all acceptable, but not 0xABDCEF
+- Literals cannot exceed 1 byte and must be expressed as hexadecimal values
+  - Example: 0xCD, bd, and 0x0056 are all acceptable, but not 0xDCEF
 - Instructions must be written on their own lines
 - Arguments are separated by spaces, and are **not** comma-separated
 - Comments can be denoted with a `#` either inline with an instruction or on its own line
@@ -65,6 +65,7 @@ Example: python3 assemble.py -i foo/input.txt -o bar/output.txt -s -b
 
 ### Additional Features
 - [ ] Declaring constants
+- [ ] Support literal labels for subroutines
 - [ ] Support pipelining instructions by stalling the processor for causal dependencies
 - [ ] Support using a stack pointer register
 - [x] Provide error description for syntax errors
