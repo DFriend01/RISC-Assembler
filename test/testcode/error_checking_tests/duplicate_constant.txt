@@ -1,0 +1,5 @@
+# Testing duplicate constant names
+
+CONSTANT hello a0
+constant world b0
+constant hello c0

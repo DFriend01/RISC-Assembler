@@ -1,0 +1,8 @@
+# Test bad label as a keyword
+
+hello: move r1 r3
+       and r2 r2
+
+sl0:   mov r4 r2
+
+xor r1 r1

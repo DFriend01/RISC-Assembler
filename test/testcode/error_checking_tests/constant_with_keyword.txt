@@ -1,0 +1,4 @@
+# Testing constant with keyword
+
+constant foo 0x11
+constant add 0

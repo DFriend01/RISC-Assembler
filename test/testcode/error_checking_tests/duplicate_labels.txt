@@ -1,0 +1,9 @@
+# Testing duplicate labels
+
+foo: mov r1 r1
+
+bar: sl0 r1
+
+foo: sl1 r1
+
+move r1 r2

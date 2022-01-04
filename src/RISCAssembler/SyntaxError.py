@@ -58,8 +58,6 @@ class AssemblerSyntaxError(Exception):
             message += "Label name cannot be a keyword"
         elif (errorcode == errorcodes.LABEL_EXISTS):
             message += "Cannot have duplicate labels"
-        elif (errorcode == errorcodes.EMPTY_CONST):
-            message += "Attempted to define a constant without a value"
         elif (errorcode == errorcodes.CONST_WITH_KWD):
             message += "Constant name cannot be a keyword"
         elif (errorcode == errorcodes.CONST_EXISTS):

@@ -47,11 +47,11 @@ class ErrorCheck:
         if len(label) == 1:
             raise AssemblerSyntaxError(linenumber, line, errorcodes.EMPTY_LABEL)
 
-        keywords = instructions.INSTRUCTIONS_WITH_REGISTERS.keys() \
-                 + instructions.INSTRUCTIONS_WITH_LITERALS.keys() \
-                 + instructions.REGISTERS.keys()
+        keywords = list(instructions.INSTRUCTIONS_WITH_REGISTERS.keys())\
+                 + list(instructions.INSTRUCTIONS_WITH_LITERALS.keys()) \
+                 + list(instructions.REGISTERS.keys())
         name = label[:-1]
-        
+
         if name in keywords:
             raise AssemblerSyntaxError(linenumber, line, errorcodes.LABEL_WITH_KWD)
         if name in existing_labels:
@@ -66,9 +66,9 @@ class ErrorCheck:
         value = parsed_line[2]
 
         ErrorCheck.validHex(value, linenumber, line)
-        keywords = instructions.INSTRUCTIONS_WITH_REGISTERS.keys() \
-                 + instructions.INSTRUCTIONS_WITH_LITERALS.keys() \
-                 + instructions.REGISTERS.keys()
+        keywords = list(instructions.INSTRUCTIONS_WITH_REGISTERS.keys()) \
+                 + list(instructions.INSTRUCTIONS_WITH_LITERALS.keys()) \
+                 + list(instructions.REGISTERS.keys())
         if name in keywords:
             raise AssemblerSyntaxError(linenumber, line, errorcodes.CONST_WITH_KWD)
         if name in existing_consts:

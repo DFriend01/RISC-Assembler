@@ -1,6 +1,5 @@
 import unittest
 from src.RISCAssembler.InstructionParser import InstructionParser
-from src.RISCAssembler.SyntaxError import AssemblerSyntaxError
 
 class TestInstructionEncodings(unittest.TestCase):
 
@@ -283,49 +282,6 @@ class TestInstructionEncodings(unittest.TestCase):
         instruction = ["STORE", "R9", "36"]
         hex_encoding = "51090036"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
- 
-
-class TestBadInstructions(unittest.TestCase):
-
-    def test_nonexistent_instruction(self):
-        with self.assertRaises(AssemblerSyntaxError):
-            instruction = ["MULT", "R1", "R2"]
-            InstructionParser.parse(instruction)
-
-    def test_too_many_arguments(self):
-        with self.assertRaises(AssemblerSyntaxError):
-            instruction = ["ADD", "R1", "R2", "R3"]
-            InstructionParser.parse(instruction)
-
-    def test_too_little_arguments(self):
-        with self.assertRaises(AssemblerSyntaxError):
-            instruction = ["FETCH", "R5"]
-            InstructionParser.parse(instruction)
-
-    def test_bad_register(self):
-        with self.assertRaises(AssemblerSyntaxError):
-            instruction = ["ADD", "R10", "R9"]
-            InstructionParser.parse(instruction)
-
-    def test_bad_register_with_literal(self):
-        with self.assertRaises(AssemblerSyntaxError):
-            instruction = ["FETCH", "R12", "0x11"]
-            InstructionParser.parse(instruction)
-
-    def test_invalid_literal_1(self):
-        with self.assertRaises(AssemblerSyntaxError):
-            instruction = ["JMP", "0x"]
-            InstructionParser.parse(instruction)
-
-    def test_invalid_literal_2(self):
-        with self.assertRaises(AssemblerSyntaxError):
-            instruction = ["JNE", "0xgf"]
-            InstructionParser.parse(instruction)
-
-    def test_literal_too_large(self):
-        with self.assertRaises(AssemblerSyntaxError):
-            instruction = ["ADD", "R1", "0x22100"]
-            InstructionParser.parse(instruction)
 
 if __name__ == "__main__":
     unittest.main()
