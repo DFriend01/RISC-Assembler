@@ -64,8 +64,8 @@ Example: python3 assemble.py -i foo/input.txt -o bar/output.txt -s -b
 - [x] Instruction encodings are printed to a text file on its own line
 
 ### Additional Features
-- [ ] Declaring constants
-- [ ] Support literal labels for subroutines
+- [x] Declaring constants
+- [x] Support literal labels for subroutines
 - [ ] Support pipelining instructions by stalling the processor for causal dependencies
-- [ ] Support using a stack pointer register
+- [x] Support using a stack pointer register
 - [x] Provide error description for syntax errors
