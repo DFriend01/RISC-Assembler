@@ -82,6 +82,7 @@ class TestPrecompilationScan(unittest.TestCase):
 
         labels_expected = {
             "START" : "0x0",
+            "CONST" : "0x3",
             "MATH"  : "0x3",
             "ARITHMETIC" : "0x3"
         }
