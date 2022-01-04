@@ -1,0 +1,12 @@
+# Simple label test with some simple labels
+
+foo: mov r1 r2
+
+bar: add r1 1
+     cmp r1 r2
+
+# comment: This label should not show up
+
+   silly: 
+   funny:
+       xor r4 r9

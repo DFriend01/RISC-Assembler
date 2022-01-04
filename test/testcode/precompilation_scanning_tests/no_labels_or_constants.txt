@@ -1,0 +1,10 @@
+# Testing without labels or constants
+
+move r4 0x12
+#mov r1 r2
+sub r1 r4
+movg r3 r5
+
+
+
+test r3 r1 # Commenting here

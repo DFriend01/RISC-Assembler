@@ -1,0 +1,16 @@
+# Test with constants and labels
+
+CONSTANT foo 0X55
+
+start: mov r0 0
+       mov r1 1
+       mov r2 2
+
+constant bar 0
+
+math:
+arithmetic: 
+    add r0 0xa
+    sub r1 r0
+    cmp r0 r2
+
