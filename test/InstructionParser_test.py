@@ -283,6 +283,16 @@ class TestInstructionEncodings(unittest.TestCase):
         hex_encoding = "51090036"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
+    def test_call(self):
+        instruction = ["CALL", "10"]
+        hex_encoding = "60000010"
+        self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
+
+    def test_return(self):
+        instruction = ["RETURN"]
+        hex_encoding = "60800000"
+        self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
+
 
 class TestInstructionsWithConstants(unittest.TestCase):
 
@@ -310,12 +320,24 @@ class TestInstructionsWithConstants(unittest.TestCase):
         hex_encoding = "50890099"
         self.assertEqual(InstructionParser.parse(instruction=instruction, constants=constants), hex_encoding)
 
+    def test_call_instr(self):
+        instruction = ["CALL", "FOO"]
+        constants = {"FOO" : "0X10"}
+        hex_encoding = "60000010"
+        self.assertEqual(InstructionParser.parse(instruction=instruction, constants=constants), hex_encoding)
+
 class TestInstructionsWithLabels(unittest.TestCase):
 
     def test_jmp_with_label(self):
         instruction = ["JMP", "HELLO"]
         labels = {"HELLO" : "0x14"}
         hex_encoding = "30000014"
+        self.assertEqual(InstructionParser.parse(instruction=instruction, labels=labels), hex_encoding)
+
+    def test_call_with_label(self):
+        instruction = ["CALL", "FOO"]
+        labels = {"FOO" : "0X19"}
+        hex_encoding = "60000019"
         self.assertEqual(InstructionParser.parse(instruction=instruction, labels=labels), hex_encoding)
 
 

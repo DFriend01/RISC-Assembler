@@ -66,9 +66,9 @@ class InstructionParser:
         ErrorCheck.validInstructionName(name, linenumber, line)
 
         has_literal = False
-
         actual_numargs = len(instruction) - 1
-        if (actual_numargs == 0) and (name in instructions.SPEICAL_INSTRUCTIONS):
+
+        if name in instructions.SPEICAL_INSTRUCTIONS:
             instruction_info = instructions.SPEICAL_INSTRUCTIONS[name]
 
         elif (InstructionParser.__contains_literal(instruction[1:])) and (name in instructions.INSTRUCTIONS_WITH_LITERALS):
@@ -100,7 +100,7 @@ class InstructionParser:
 
         encoding = ""
 
-        # Assumes only HALT or NOP
+        # Assumes only HALT, NOP, or RETURN
         if actual_numargs == 0:
             encoding += instruction_info.opcode + instruction_info.op \
                      + instruction_info.cond + (20 * "0")

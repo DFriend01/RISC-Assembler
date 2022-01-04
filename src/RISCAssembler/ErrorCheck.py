@@ -11,7 +11,9 @@ class ErrorCheck:
 
     @staticmethod
     def validInstructionName(name, linenumber, line):
-        if (not name in instructions.INSTRUCTIONS_WITH_REGISTERS) and (not name in instructions.SPEICAL_INSTRUCTIONS):
+        if (not name in instructions.INSTRUCTIONS_WITH_REGISTERS) and \
+            (not name in instructions.SPEICAL_INSTRUCTIONS) and \
+             (not name in instructions.INSTRUCTIONS_WITH_LITERALS):
             raise AssemblerSyntaxError(linenumber, line, errorcodes.UNDEFINED_INSTRUCTION)
 
     @staticmethod

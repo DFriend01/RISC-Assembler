@@ -28,7 +28,9 @@ INSTRUCTIONS_WITH_LITERALS = {
     "JG"     : Instruction("0011", "00000", "110", 1),
 
     "FETCH"   : Instruction("0101", "00001", "000", 2),
-    "STORE"   : Instruction("0101", "00010", "000", 2)
+    "STORE"   : Instruction("0101", "00010", "000", 2),
+
+    "CALL"    : Instruction("0110", "00000", "000", 1)
 }
 
 INSTRUCTIONS_WITH_REGISTERS = {
@@ -68,7 +70,8 @@ INSTRUCTIONS_WITH_REGISTERS = {
 
 SPEICAL_INSTRUCTIONS = {
     "HALT"    : Instruction("0111", "00000", "000", 0),
-    "NOP"     : Instruction("0000", "00000", "000", 0)
+    "NOP"     : Instruction("0000", "00000", "000", 0),
+    "RETURN"  : Instruction("0110", "00001", "000", 0)
 }
 
 REGISTERS = {
