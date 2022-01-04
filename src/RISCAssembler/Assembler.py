@@ -30,7 +30,7 @@ class Assembler:
         encodings = []
 
         for linenumber, instruction in instructions:
-            instr = InstructionParser.parse(instruction, linenumber, output_binary)
+            instr = InstructionParser.parse(instruction, linenumber, output_binary, labels, constants)
             if instr is not None:
                 encodings.append(instr + "\n")
 
