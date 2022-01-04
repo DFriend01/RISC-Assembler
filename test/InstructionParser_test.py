@@ -170,8 +170,8 @@ class TestInstructionEncodings(unittest.TestCase):
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_movne_with_literal(self):
-        instruction = "movne r2 71ED"
-        hex_encoding = "102271ed"
+        instruction = "movne r2 ED"
+        hex_encoding = "102200ed"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_movc_with_literal(self):
@@ -200,13 +200,13 @@ class TestInstructionEncodings(unittest.TestCase):
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_addc_with_literal(self):
-        instruction = "addc r3 78F"
-        hex_encoding = "20b3078f"
+        instruction = "addc r3 8F"
+        hex_encoding = "20b3008f"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_and_with_literal(self):
-        instruction = "AND R5 1c12"
-        hex_encoding = "21251c12"
+        instruction = "AND R5 12"
+        hex_encoding = "21250012"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_cmp_with_literal(self):
@@ -215,8 +215,8 @@ class TestInstructionEncodings(unittest.TestCase):
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_mvn_with_literal(self):
-        instruction = "mvn r2 2307"
-        hex_encoding = "22222307"
+        instruction = "mvn r2 07"
+        hex_encoding = "22220007"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_not_with_literal(self):
@@ -240,8 +240,8 @@ class TestInstructionEncodings(unittest.TestCase):
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_test_with_literal(self):
-        instruction = "test r2 112"
-        hex_encoding = "24820112"
+        instruction = "test r2 12"
+        hex_encoding = "24820012"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_xor_with_literal(self):
@@ -265,23 +265,23 @@ class TestInstructionEncodings(unittest.TestCase):
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_jl_with_literal(self):
-        instruction = "jl 0x112"
-        hex_encoding = "30500112"
+        instruction = "jl 0x12"
+        hex_encoding = "30500012"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_jg_with_literal(self):
-        instruction = "jg 1000"
-        hex_encoding = "30601000"
+        instruction = "jg 10"
+        hex_encoding = "30600010"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_fetch_with_literal(self):
         instruction = "fetch r9 0x99"
-        hex_encoding = "50899900"
+        hex_encoding = "50890099"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_store_with_literal(self):
         instruction = "store r9 36"
-        hex_encoding = "51093600"
+        hex_encoding = "51090036"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
     def test_comment(self):
@@ -323,7 +323,7 @@ class TestBadInstructions(unittest.TestCase):
 
     def test_invalid_literal_2(self):
         with self.assertRaises(AssemblerSyntaxError):
-            instruction = "JNE 0xgff0"
+            instruction = "JNE 0xgf"
             InstructionParser.parse(instruction)
 
     def test_literal_too_large(self):

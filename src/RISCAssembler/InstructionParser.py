@@ -6,8 +6,8 @@ from . import errorcodes
 REGLEN = 2
 MINREG = 0
 MAXREG = 9
-MAXNIBBLES = 4
-MEMORY_OPCODE = "0101"
+MAXNIBBLES = 2
+# MEMORY_OPCODE = "0101"
 INSTRUCTION_LENGTH_BINARY = 32
 INSTRUCTION_LENGTH_HEX = 4 #bytes
 
@@ -50,6 +50,10 @@ class ErrorCheck:
                 raise ValueError
         except:
             raise AssemblerSyntaxError(linenumber, line, errorcodes.BAD_LITERAL)
+
+        num = num.lstrip("0")
+        if(not num):
+            num = "0"
 
         if (len(num) > MAXNIBBLES):
             raise AssemblerSyntaxError(linenumber, line, errorcodes.BIG_LITERAL)
@@ -117,8 +121,8 @@ class InstructionParser:
             if has_literal:
                 ErrorCheck.validHex(instruction[1], linenumber, line)
                 encoding += instruction_info.opcode + instruction_info.op \
-                         + instruction_info.cond + (4 * "0") \
-                         + binbits(int(instruction[1], 16), 16)
+                         + instruction_info.cond + (12 * "0") \
+                         + binbits(int(instruction[1], 16), 8)
 
             # Single argument instruction that takes a register
             else:
@@ -132,14 +136,9 @@ class InstructionParser:
 
             if has_literal:
                 ErrorCheck.validHex(instruction[2], linenumber, line)
-                if instruction_info.opcode == MEMORY_OPCODE:
-                    encoding += instruction_info.opcode + instruction_info.op \
-                             + instruction_info.cond + instructions.REGISTERS[instruction[1]] \
-                             + binbits(int(instruction[2][-2:], 16), 8) + (8 * "0")
-                else:
-                    encoding += instruction_info.opcode + instruction_info.op \
-                             + instruction_info.cond + instructions.REGISTERS[instruction[1]] \
-                             + binbits(int(instruction[2], 16), 16)
+                encoding += instruction_info.opcode + instruction_info.op \
+                            + instruction_info.cond + instructions.REGISTERS[instruction[1]] \
+                            + (8 * "0")  + binbits(int(instruction[2], 16), 8)
             else:
                 ErrorCheck.validRegister(instruction[2], linenumber, line)
                 encoding += instruction_info.opcode + instruction_info.op \
