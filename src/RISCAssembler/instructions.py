@@ -58,12 +58,6 @@ INSTRUCTIONS_WITH_REGISTERS = {
     "SR0"     : Instruction("0010", "11101", "010", 1),
     "SR1"     : Instruction("0010", "11110", "010", 1),
 
-    "JMP"     : Instruction("0011", "10000", "000", 1),
-    "JE"      : Instruction("0011", "10000", "001", 1),
-    "JNE"     : Instruction("0011", "10000", "010", 1),
-    "JL"     : Instruction("0011", "10000", "101", 1),
-    "JG"     : Instruction("0011", "10000", "110", 1),
-
     "FETCH"   : Instruction("0101", "10001", "000", 2),
     "STORE"   : Instruction("0101", "10010", "000", 2)
 }

@@ -123,31 +123,6 @@ class TestInstructionEncodings(unittest.TestCase):
         hex_encoding = "2f210000"
         self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
 
-    def test_jmp_with_register(self):
-        instruction = ["JMP", "R5"]
-        hex_encoding = "38050000"
-        self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
-
-    def test_je_with_register(self):
-        instruction = ["JE", "R5"]
-        hex_encoding = "38150000"
-        self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
-
-    def test_jne_with_register(self):
-        instruction = ["JNE", "R5"]
-        hex_encoding = "38250000"
-        self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
-
-    def test_jl_with_register(self):
-        instruction = ["JL", "R5"]
-        hex_encoding = "38550000"
-        self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
-
-    def test_jg_with_register(self):
-        instruction = ["JG", "R5"]
-        hex_encoding = "38650000"
-        self.assertEqual(InstructionParser.parse(instruction), hex_encoding)
-
     def test_fetch_with_register(self):
         instruction = ["FETCH", "R9", "R8"]
         hex_encoding = "58898000"

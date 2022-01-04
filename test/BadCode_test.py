@@ -11,6 +11,11 @@ class TestBadInstructions(unittest.TestCase):
             instruction = ["MULT", "R1", "R2"]
             InstructionParser.parse(instruction)
 
+    def test_jump_with_register(self):
+        with self.assertRaises(AssemblerSyntaxError):
+            instruction = ["JMP", "R1"]
+            InstructionParser.parse(instruction)
+
     def test_too_many_arguments(self):
         with self.assertRaises(AssemblerSyntaxError):
             instruction = ["ADD", "R1", "R2", "R3"]
