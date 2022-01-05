@@ -4,6 +4,7 @@ import re
 def get_instruction(line):
     return re.sub("#.*$", "", line).strip().upper().split()
 
+
 class TestGetInstruction(unittest.TestCase):
 
     def test_only_comment(self):

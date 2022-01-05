@@ -4,6 +4,7 @@ from src.RISCAssembler.Assembler import Assembler
 from src.RISCAssembler.InstructionParser import InstructionParser
 from src.RISCAssembler.SyntaxError import AssemblerSyntaxError
 
+
 class TestBadInstructions(unittest.TestCase):
 
     def test_nonexistent_instruction(self):
@@ -109,3 +110,4 @@ class TestBadConstants(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+    

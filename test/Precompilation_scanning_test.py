@@ -99,5 +99,3 @@ class TestPrecompilationScan(unittest.TestCase):
         self.assertListEqual(instructions_actual, instructions_expected)
         self.assertDictEqual(labels_actual, labels_expected)
         self.assertDictEqual(constants_actual, constants_expected)
-
-

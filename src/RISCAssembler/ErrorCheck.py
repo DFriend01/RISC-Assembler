@@ -26,23 +26,25 @@ class ErrorCheck:
 
     @staticmethod
     def validHex(x, linenumber=0, line=""):
-
+        
+        # Check if hex value is formatted correctly
         hexlower = x.lower()
-
         if (hexlower[0] == NEG_SIGN) or (len(hexlower) < PREFIX_LEN + 1) or (hexlower[:2] != LITERAL_PREFIX):
             raise AssemblerSyntaxError(linenumber, line, errorcodes.BAD_LITERAL)
-
+        
+        # Check if the hex value is valid
         num = hexlower.split("x")[1]
-
         try:
             int(num, 16)
         except:
             raise AssemblerSyntaxError(linenumber, line, errorcodes.BAD_LITERAL)
 
+        # Ignore leading zeroes
         num = num.lstrip("0")
         if(not num):
             num = "0"
 
+        # Check if the hex value does not exceed 1 byte
         if (len(num) > MAXNIBBLES):
             raise AssemblerSyntaxError(linenumber, line, errorcodes.BIG_LITERAL)
         

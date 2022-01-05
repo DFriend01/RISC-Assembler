@@ -4,15 +4,10 @@ from .SyntaxError import AssemblerSyntaxError
 from . import errorcodes
 from .ErrorCheck import ErrorCheck
 
-REGLEN = 2
-MINREG = 0
-MAXREG = 9
-INSTRUCTION_LENGTH_BINARY = 32
-INSTRUCTION_LENGTH_HEX = 4 #bytes
+INSTRUCTION_LENGTH_HEX = 4       # bytes
 
 def binbits(x, n):
     bits = bin(x).split('b')[1]
-
     if len(bits) < n:
         bits = '0' * (n - len(bits)) + bits
     return bits
@@ -20,7 +15,6 @@ def binbits(x, n):
 def hexbytes(x, n):
     num_nibbles = 2 * n
     bytes = hex(x).lower().split('x')[1]
-
     if len(bytes) < num_nibbles:
         bytes = '0' * (num_nibbles - len(bytes)) + bytes
     return bytes
@@ -30,7 +24,6 @@ class InstructionParser:
     @staticmethod
     def parse(instruction, linenumber=0, output_binary=False, labels={}, constants={}):
         line = " ".join(instruction)
-
         if not instruction:
             return None
         else:
@@ -69,9 +62,12 @@ class InstructionParser:
     
     @staticmethod
     def __encode_instruction(instruction, line, linenumber, output_binary, labels, constants):
+
+        # Check if instruction exists
         name = instruction[0]
         ErrorCheck.validInstructionName(name, linenumber, line)
 
+        # Determine the kind of arguments the instruction has and decode any labels and constants
         has_literal = False
         actual_numargs = len(instruction) - 1
 
@@ -102,16 +98,20 @@ class InstructionParser:
         else:
             raise AssemblerSyntaxError(linenumber, line, errorcodes.BAD_ARGS)
 
+        # Check that the number of arguments matches the expected number
         expected_numargs = instruction_info.numargs
         ErrorCheck.validNumberOfArguments(actual_numargs, expected_numargs, linenumber, line)
 
+        # Get the instruction encoding
         encoding = ""
 
         # Assumes only HALT, NOP, or RETURN
         if actual_numargs == 0:
             encoding += instruction_info.opcode + instruction_info.op \
                      + instruction_info.cond + (20 * "0")
+
         elif actual_numargs == 1:
+
             # Single argument instruction that takes a literal
             if has_literal:
                 ErrorCheck.validHex(instruction[1], linenumber, line)
@@ -127,21 +127,29 @@ class InstructionParser:
                          + (16 * "0")
             
         elif actual_numargs == 2:
+
+            # If two arguments, the first one is always a register
             ErrorCheck.validRegister(instruction[1], linenumber, line)
 
+            # If the second argument is a literal
             if has_literal:
                 ErrorCheck.validHex(instruction[2], linenumber, line)
                 encoding += instruction_info.opcode + instruction_info.op \
                             + instruction_info.cond + instructions.REGISTERS[instruction[1]] \
                             + (8 * "0")  + binbits(int(instruction[2], 16), 8)
+
+            # The second argument is a register
             else:
                 ErrorCheck.validRegister(instruction[2], linenumber, line)
                 encoding += instruction_info.opcode + instruction_info.op \
                              + instruction_info.cond + instructions.REGISTERS[instruction[1]] \
                              + instructions.REGISTERS[instruction[2]] + (12 * "0")
+
+        # Arguments do not follow the instruction set
         else:
             raise AssemblerSyntaxError(linenumber, line, errorcodes.UNKNOWN_ERROR)
 
+        # Return the instruction encoding either in binary or hexadecimal
         if output_binary:
             return encoding
         else:

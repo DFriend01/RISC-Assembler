@@ -301,6 +301,7 @@ class TestInstructionsWithConstants(unittest.TestCase):
         hex_encoding = "60000010"
         self.assertEqual(InstructionParser.parse(instruction=instruction, constants=constants), hex_encoding)
 
+
 class TestInstructionsWithLabels(unittest.TestCase):
 
     def test_jmp_with_label(self):
