@@ -4,7 +4,7 @@ This is an assembler written in python that translates a custom assembly languag
 
 ## Instruction Set
 
-Refer to the [instruction set](https://github.com/DFriend01/RISC-Assembler/blob/main/docs/InstructionSet.pdf) to see which instructions are supported and how they function.
+Refer to the [instruction set](https://github.com/DFriend01/RISC-Assembler/blob/main/docs/InstructionSet.pdf) to see which instructions are supported and how they function. Take a look at the [instruction encodings](https://github.com/DFriend01/RISC-Assembler/blob/main/docs/InstructionEncodings.pdf) to see how all the instructions are encoded into 32 bits.
 
 ## Syntax Rules
 
