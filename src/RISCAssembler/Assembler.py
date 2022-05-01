@@ -73,20 +73,20 @@ class Assembler:
 
                 # If the line has a label
                 if Assembler.line_has_label(parsed_line):
-                    ErrorCheck.validLabel(parsed_line[0], linenumber, line, labels.keys())
+                    ErrorCheck.validLabel(parsed_line[0], linenumber + 1, line, labels.keys())
                     labels[Assembler.get_label_name(parsed_line[0])] = str(hex(len(instructions)))
                      
                     # Check for constant or instruction and add them if they exist
                     if (len(parsed_line) > 1):
                         if Assembler.line_has_constant(parsed_line[1:]):
-                            ErrorCheck.validConstant(parsed_line[1:], linenumber, line, constants.keys())
+                            ErrorCheck.validConstant(parsed_line[1:], linenumber + 1, line, constants.keys())
                             constants[Assembler.get_const_name(parsed_line[1:])] = Assembler.get_const_value(parsed_line[1:])
                         else:
                             instructions.append((linenumber + 1, parsed_line[1:]))
 
                 # If the line has a constant
                 elif Assembler.line_has_constant(parsed_line):
-                    ErrorCheck.validConstant(parsed_line, linenumber, line, constants.keys())
+                    ErrorCheck.validConstant(parsed_line, linenumber + 1, line, constants.keys())
                     constants[Assembler.get_const_name(parsed_line)] = Assembler.get_const_value(parsed_line)
 
                 # The line has an instruction
