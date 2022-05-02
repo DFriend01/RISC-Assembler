@@ -1,4 +1,6 @@
-from .InstructionTuples import Instruction
+from collections import namedtuple
+
+Instruction = namedtuple("Instruction", ["opcode", "op", "cond", "numargs"])
 
 INSTRUCTIONS_WITH_LITERALS = {
     "MOV"     : Instruction("0001", "00000", "000", 2),
