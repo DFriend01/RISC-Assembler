@@ -1,7 +1,7 @@
 import os
 import sys
 import argparse
-import src.RISCAssembler.Assembler as asm
+import RISCAssembler.Assembler as asm
 
 DEBUG = False
 
