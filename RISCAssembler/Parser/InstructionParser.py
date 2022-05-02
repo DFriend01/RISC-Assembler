@@ -1,8 +1,8 @@
 import re
 from RISCAssembler.Parser import instructions
-from .SyntaxError import AssemblerSyntaxError
-from . import errorcodes
-from .ErrorCheck import ErrorCheck
+from RISCAssembler.Error.SyntaxError import AssemblerSyntaxError
+from RISCAssembler.Error import errorcodes
+from RISCAssembler.Error.ErrorCheck import ErrorCheck
 
 INSTRUCTION_LENGTH_HEX = 4       # bytes
 

@@ -2,7 +2,7 @@ import unittest
 import os
 from RISCAssembler.Assembler import Assembler
 from RISCAssembler.Parser.InstructionParser import InstructionParser
-from RISCAssembler.SyntaxError import AssemblerSyntaxError
+from RISCAssembler.Error.SyntaxError import AssemblerSyntaxError
 
 FILEPATH = os.path.dirname(__file__)
 

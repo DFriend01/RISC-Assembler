@@ -1,6 +1,6 @@
 import re
 from RISCAssembler.Parser import instructions
-from . import errorcodes
+from RISCAssembler.Error import errorcodes
 
 def get_instruction(line):
         return re.sub("#.*$", "", line).strip().upper().split()

@@ -1,6 +1,6 @@
 from RISCAssembler.Parser import instructions
-from .SyntaxError import AssemblerSyntaxError
-from . import errorcodes
+from RISCAssembler.Error.SyntaxError import AssemblerSyntaxError
+from RISCAssembler.Error import errorcodes
 
 MAXNIBBLES = 2
 PREFIX_LEN = 2

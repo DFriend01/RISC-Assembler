@@ -1,7 +1,7 @@
 import os
 import re
 
-from .ErrorCheck import ErrorCheck
+from RISCAssembler.Error.ErrorCheck import ErrorCheck
 from RISCAssembler.Parser.InstructionParser import InstructionParser
 
 def get_file_extension(file):
