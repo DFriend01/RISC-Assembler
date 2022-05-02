@@ -1,5 +1,5 @@
 import unittest
-from RISCAssembler.InstructionParser import InstructionParser
+from RISCAssembler.Parser.InstructionParser import InstructionParser
 
 class TestInstructionEncodings(unittest.TestCase):
 

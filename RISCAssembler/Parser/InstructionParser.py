@@ -1,5 +1,5 @@
 import re
-from . import instructions
+from RISCAssembler.Parser import instructions
 from .SyntaxError import AssemblerSyntaxError
 from . import errorcodes
 from .ErrorCheck import ErrorCheck

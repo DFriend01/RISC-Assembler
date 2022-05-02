@@ -1,5 +1,5 @@
 import re
-from . import instructions
+from RISCAssembler.Parser import instructions
 from . import errorcodes
 
 def get_instruction(line):

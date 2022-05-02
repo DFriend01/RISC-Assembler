@@ -2,7 +2,7 @@ import os
 import re
 
 from .ErrorCheck import ErrorCheck
-from .InstructionParser import InstructionParser
+from RISCAssembler.Parser.InstructionParser import InstructionParser
 
 def get_file_extension(file):
     return os.path.splitext(file)[1]
