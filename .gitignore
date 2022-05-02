@@ -1,5 +1,6 @@
 __pycache__/
 
 # Dependency files
+env/
 venv/
 *.egg-info

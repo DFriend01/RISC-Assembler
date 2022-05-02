@@ -83,6 +83,34 @@ Example: python3 assemble.py -i foo/input.txt -o bar/output.txt -s -b
 --help    Display this message
 ```
 
+## Setup
+
+### Step 1: Set up the virtual environment (optional)
+A virtual environment is optional, but highly recommended. Refer to the [python docs](https://docs.python.org/3/tutorial/venv.html) if you are
+unfamiliar with virtual environments. Execute the following **in the project
+root directory**:
+
+```
+# Install virtualenv globally if not already installed
+python3 -m pip install virtualenv
+
+# Create the virtual environment
+python3 -m venv env
+
+# Activate the virtual environment
+env/Scripts/activate (Windows)
+source env/bin/activate (Unix)
+```
+
+### Step 2: Install the RISCAssembler package
+If you are using a virtual environment, activate it first. Then, execute
+`pip install -e .`. **Make sure you are in the project root directory when
+running this command**.
+
+## Running the Tests
+To run all of the tests at once, execute `python3 -m unittest discover -s test -p '*_test.py'`. Alternatively, one can go into the `test` directory and
+run the specific test file directly.
+
 ## TODO
 
 ### Minimum Requirements
