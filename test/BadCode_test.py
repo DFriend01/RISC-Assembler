@@ -1,8 +1,10 @@
 import unittest
 import os
-from src.RISCAssembler.Assembler import Assembler
-from src.RISCAssembler.InstructionParser import InstructionParser
-from src.RISCAssembler.SyntaxError import AssemblerSyntaxError
+from RISCAssembler.Assembler import Assembler
+from RISCAssembler.InstructionParser import InstructionParser
+from RISCAssembler.SyntaxError import AssemblerSyntaxError
+
+FILEPATH = os.path.dirname(__file__)
 
 
 class TestBadInstructions(unittest.TestCase):
@@ -67,46 +69,46 @@ class TestBadLabels(unittest.TestCase):
 
     def test_empty_label(self):
         with self.assertRaises(AssemblerSyntaxError):
-            Assembler.scan_source_file(os.path.join("test", "testcode", "error_checking_tests", "empty_label.txt"))
+            Assembler.scan_source_file(os.path.join(FILEPATH, "testcode", "error_checking_tests", "empty_label.txt"))
 
     def test_label_with_keyword(self):
         with self.assertRaises(AssemblerSyntaxError):
-            Assembler.scan_source_file(os.path.join("test", "testcode", "error_checking_tests", "label_with_keyword.txt"))
+            Assembler.scan_source_file(os.path.join(FILEPATH, "testcode", "error_checking_tests", "label_with_keyword.txt"))
 
     def test_empty_label_with_instruction(self):
         with self.assertRaises(AssemblerSyntaxError):
-            Assembler.scan_source_file(os.path.join("test", "testcode", "error_checking_tests", "empty_label_with_instruction.txt"))
+            Assembler.scan_source_file(os.path.join(FILEPATH, "testcode", "error_checking_tests", "empty_label_with_instruction.txt"))
 
     def test_duplicate_labels(self):
         with self.assertRaises(AssemblerSyntaxError):
-            Assembler.scan_source_file(os.path.join("test", "testcode", "error_checking_tests", "duplicate_labels.txt"))
+            Assembler.scan_source_file(os.path.join(FILEPATH, "testcode", "error_checking_tests", "duplicate_labels.txt"))
 
     def test_numerical_label_name(self):
         with self.assertRaises(AssemblerSyntaxError):
-            Assembler.scan_source_file(os.path.join("test", "testcode", "error_checking_tests", "label_start_with_digit.txt"))
+            Assembler.scan_source_file(os.path.join(FILEPATH, "testcode", "error_checking_tests", "label_start_with_digit.txt"))
 
     
 class TestBadConstants(unittest.TestCase):
 
     def test_bad_constant_literal(self):
         with self.assertRaises(AssemblerSyntaxError):
-            Assembler.scan_source_file(os.path.join("test", "testcode", "error_checking_tests", "bad_constant_literal.txt"))
+            Assembler.scan_source_file(os.path.join(FILEPATH, "testcode", "error_checking_tests", "bad_constant_literal.txt"))
 
     def test_constant_missing_args(self):
         with self.assertRaises(AssemblerSyntaxError):
-            Assembler.scan_source_file(os.path.join("test", "testcode", "error_checking_tests", "constant_missing_args.txt"))
+            Assembler.scan_source_file(os.path.join(FILEPATH, "testcode", "error_checking_tests", "constant_missing_args.txt"))
 
     def test_constant_with_keyword(self):
         with self.assertRaises(AssemblerSyntaxError):
-            Assembler.scan_source_file(os.path.join("test", "testcode", "error_checking_tests", "constant_with_keyword.txt"))
+            Assembler.scan_source_file(os.path.join(FILEPATH, "testcode", "error_checking_tests", "constant_with_keyword.txt"))
 
     def test_duplicate_constant(self):
         with self.assertRaises(AssemblerSyntaxError):
-            Assembler.scan_source_file(os.path.join("test", "testcode", "error_checking_tests", "duplicate_constant.txt"))
+            Assembler.scan_source_file(os.path.join(FILEPATH, "testcode", "error_checking_tests", "duplicate_constant.txt"))
 
     def test_numerical_constant_name(self):
         with self.assertRaises(AssemblerSyntaxError):
-            Assembler.scan_source_file(os.path.join("test", "testcode", "error_checking_tests", "constant_start_with_digit.txt"))
+            Assembler.scan_source_file(os.path.join(FILEPATH, "testcode", "error_checking_tests", "constant_start_with_digit.txt"))
 
 if __name__ == "__main__":
     unittest.main()

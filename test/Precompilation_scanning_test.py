@@ -1,6 +1,8 @@
 import unittest
 import os
-from src.RISCAssembler.Assembler import Assembler
+from RISCAssembler.Assembler import Assembler
+
+FILEPATH = os.path.dirname(__file__)
 
 class TestPrecompilationScan(unittest.TestCase):
 
@@ -22,7 +24,7 @@ class TestPrecompilationScan(unittest.TestCase):
         constants_expected = {}
 
         instructions_actual, constants_actual, labels_actual = Assembler.scan_source_file(
-            os.path.join("test", "testcode", "precompilation_scanning_tests", "simple_label_test.txt")
+            os.path.join(FILEPATH, "testcode", "precompilation_scanning_tests", "simple_label_test.txt")
         )
 
         self.assertListEqual(instructions_actual, instructions_expected)
@@ -43,7 +45,7 @@ class TestPrecompilationScan(unittest.TestCase):
         }
         
         instructions_actual, constants_actual, labels_actual = Assembler.scan_source_file(
-            os.path.join("test", "testcode", "precompilation_scanning_tests", "simple_constant_test.txt")
+            os.path.join(FILEPATH, "testcode", "precompilation_scanning_tests", "simple_constant_test.txt")
         )
 
         self.assertListEqual(instructions_actual, instructions_expected)
@@ -63,7 +65,7 @@ class TestPrecompilationScan(unittest.TestCase):
         constants_expected = {}
 
         instructions_actual, constants_actual, labels_actual = Assembler.scan_source_file(
-            os.path.join("test", "testcode", "precompilation_scanning_tests", "no_labels_or_constants.txt")
+            os.path.join(FILEPATH, "testcode", "precompilation_scanning_tests", "no_labels_or_constants.txt")
         )
 
         self.assertListEqual(instructions_actual, instructions_expected)
@@ -93,9 +95,12 @@ class TestPrecompilationScan(unittest.TestCase):
         }
 
         instructions_actual, constants_actual, labels_actual = Assembler.scan_source_file(
-            os.path.join("test", "testcode", "precompilation_scanning_tests", "labels_and_constants.txt")
+            os.path.join(FILEPATH, "testcode", "precompilation_scanning_tests", "labels_and_constants.txt")
         )
 
         self.assertListEqual(instructions_actual, instructions_expected)
         self.assertDictEqual(labels_actual, labels_expected)
         self.assertDictEqual(constants_actual, constants_expected)
+
+if __name__ == "__main__":
+    unittest.main()
